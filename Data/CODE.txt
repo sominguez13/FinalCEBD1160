@@ -1,0 +1,60 @@
+﻿HISTOGRAM OPERATIONAL MARGIN GROSS
+
+
+# Set gnuplot terminal ‘wxt’ and plog the code:
+Terminal type set to 'wxt'
+reset
+set key off
+set border 3
+set yzeroaxis
+set style fill solid 1.0 noborder
+bin_number(x) =floor(x/bin_width)
+bin_width = 0.5;
+rounded(x)= bin_width * (bin_number(x) + 0.5)
+set terminal png
+set title "Operational Margin Gross"
+set output "Operational Margin Gross.png"
+plot "Gross_Margin.csv" using (rounded($1)):(1) smooth frequency with boxes
+
+
+#get out gnuplot terminal:
+gnuplot> exit
+
+
+#type : git status to add file png created:
+root@d19caae0e0ec:/Data/Main Data/Gnuplot# git status
+
+
+#type : git  add file to add you file.png created:
+git add "Operational Margin Gross.png”
+
+
+#type : git  commit -am “adding files to commit the file.png added to git master:
+git commit -am "adding files"
+
+
+
+
+Gnuplot: How to make scatter plots with transparent points
+
+set title 'Operating and Gross Marging'
+set ylabel 'Gross Marging'
+set xlabel 'Operating Marging'
+set grid
+set term png
+set output 'Operating and Gross Marging.png'
+set datafile separator ","
+set style circle radius 0.02
+plot 'Operating_and_Gross_Margin.csv' u 1:2 with circles lc rgb "blue", "" u 1:2 every 50 w circles lc rgb "red" fs solid 1.0 border lt -1
+
+
+HISTOGRAM OPERATIONAL MARGIN GROSS IN R 
+
+
+plot(hist(y$Gross_Margin), main = "Histogram Gross Margin", xlab = "Gross Margin")
+
+
+
+
+Gnuplot: How to make scatter plots with transparent points IN R
+ plot(y$Gross_Margin, y$Operating_Margin, main = "Operating and Gross Margin ", xlab = "Gross Margin", ylab = "Operating Margin")
